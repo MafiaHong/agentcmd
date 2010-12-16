@@ -1,0 +1,27 @@
+= AgentCmd
+
+Agent to run commands on Windows based Rackspace Cloud Servers
+
+== Description
+
+AgentCmd is an application that allows you to execute scripts on a Windows
+Cloud Servers using a pluggable command source implementation.
+
+The application runs as a Windows Service.
+
+The application includes a pluggable ICommandSource interface which
+defines a way to obtain a script, execute it, and archive a log of
+the result. The cloud server ID is used as a key to obtain scripts and archive
+the results.
+
+The default ICommandSource provider uses a Rackspace Cloud Files container to
+provide access to a scripts and archive the results.
+
+== Author
+
+Dan Prince <dan.prince@rackspace.com>
+
+== License
+
+See COPYING for license information.
+Copyright (c) 2010, Rackspace US, Inc.

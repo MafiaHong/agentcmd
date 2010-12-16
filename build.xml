@@ -1,0 +1,88 @@
+<!-- Author: Dan Prince -->
+<project name="agentcmd" default="compile" basedir=".">
+
+	<property name="out.dir"  value="${basedir}/build" />
+	<property name="lib.dir"  value="${basedir}/lib" />
+    <property name="out.test.dir"    value="${out.dir}/test" />
+    <property name="out.class.dir"    value="${out.dir}/classes" />
+    <property name="src.dir"     value="${basedir}/src" />
+    <property name="src.test.dir"     value="${src.dir}/test" />
+
+    <target name="clean">
+        <delete dir="${out.dir}" />
+    </target>
+
+	<target name="compile">
+
+        <mkdir dir="${out.dir}/classes"/>
+
+		<javac
+			srcdir="${src.dir}/java"
+			destdir="${out.dir}/classes"
+			includeantruntime="false"
+			deprecation="true">
+			<compilerarg value="-Xlint"/>
+            <classpath>
+                <fileset dir="${lib.dir}">
+                    <include name="*.jar"/>
+                </fileset>
+            </classpath>
+		</javac>
+        <copy todir="${out.dir}/classes/" file="${basedir}/log4j.properties"/>
+
+		<jar jarfile="${out.dir}/agentcmd.jar">
+			<fileset dir="${out.dir}/classes" />
+		</jar>
+
+	</target>
+
+	<target name="test" depends="compile">
+
+		<mkdir dir="${out.test.dir}" />
+		<mkdir dir="${out.test.dir}/classes" />
+
+		<javac
+			srcdir="${src.test.dir}"
+			destdir="${out.test.dir}/classes"
+			includeantruntime="false"
+			deprecation="true">
+			<compilerarg value="-Xlint"/>
+			<classpath>
+				<pathelement location="${out.class.dir}"/>
+				<fileset dir="${lib.dir}">
+					<include name="*.jar"/>
+				</fileset>
+			</classpath>
+		</javac>
+
+		<junit printsummary="yes" forkmode="once" haltonfailure="no" dir="${basedir}">
+			<classpath>
+				<pathelement location="${out.test.dir}/classes"/>
+				<pathelement location="${out.class.dir}"/>
+				<fileset dir="${lib.dir}">
+					<include name="*.jar"/>
+				</fileset>
+			</classpath>
+			<formatter type="xml"/>
+			<batchtest fork="yes" todir="${out.test.dir}">
+				<fileset dir="${out.test.dir}/classes">
+					<include name="agentcmd/*Test.class"/>
+				</fileset>
+			</batchtest>
+
+		</junit>
+
+		<junitreport todir="${out.test.dir}">
+			<fileset dir="${out.test.dir}">
+				<include name="*.xml"/>
+			</fileset>
+			<report format="frames" todir="${out.test.dir}/report/html"/>
+		</junitreport>
+
+	</target>
+
+	<target name="deploy" depends="compile">
+		<ant antfile="deploy.xml" dir="." target="installer"/>
+	</target>
+
+</project>

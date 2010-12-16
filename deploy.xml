@@ -1,0 +1,13 @@
+<project name="agentcmd-deploy" default="installer" basedir=".">
+
+	<taskdef name="install4j"
+		classname="com.install4j.Install4JTask"
+		classpath="${lib.install4j}"/>
+               
+	<target name="installer">
+
+		<install4j projectfile="agentcmd.install4j"/>
+
+	</target>
+
+</project>
