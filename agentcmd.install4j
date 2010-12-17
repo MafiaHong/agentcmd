@@ -35,7 +35,7 @@
   </files>
   <launchers>
     <launcher name="AgentCmd" id="58" external="false" excludeFromMenu="true" menuName="" icnsFile="" pngIcon16File="" pngIcon32File="" macServiceDependencies="" swtApp="false" fileset="">
-      <executable name="AgentCmd" type="1" iconSet="false" iconFile="" executableDir="." redirectStderr="true" stderrFile="log.txt" stderrMode="append" redirectStdout="true" stdoutFile="log.txt" stdoutMode="append" failOnStderrOutput="true" executableMode="3" changeWorkingDirectory="true" workingDirectory="." singleInstance="true" serviceStartType="2" serviceDependencies="" serviceDescription="" jreLocation="" executionLevel="requireAdministrator" checkConsoleParameter="false" globalSingleInstance="false">
+      <executable name="AgentCmd" type="1" iconSet="false" iconFile="" executableDir="." redirectStderr="true" stderrFile="log.txt" stderrMode="append" redirectStdout="true" stdoutFile="log.txt" stdoutMode="append" failOnStderrOutput="true" executableMode="3" changeWorkingDirectory="true" workingDirectory="." singleInstance="true" serviceStartType="2" serviceDependencies="" serviceDescription="Agent to run commands on Windows based Rackspace Cloud Servers" jreLocation="" executionLevel="requireAdministrator" checkConsoleParameter="false" globalSingleInstance="false">
         <versionInfo include="false" fileVersion="" fileDescription="" legalCopyright="" internalName="" productName="" />
       </executable>
       <splashScreen show="false" autoOff="true" alwaysOnTop="true" width="0" height="0" bitmapFile="" java6SplashScreen="false">
