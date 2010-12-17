@@ -23,7 +23,7 @@ public class PropUtil {
         FileInputStream in = new FileInputStream(propFile);
         props.load(in);    
         in.close();
-		logger.error("Properties loaded.");
+		logger.info("Properties loaded.");
 
 	}
 
