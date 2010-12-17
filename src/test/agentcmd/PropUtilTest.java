@@ -13,7 +13,7 @@ public class PropUtilTest {
 	public void getProperty() {
 
 		try {
-			assertEquals("test", PropUtil.getProperty("cloudfiles.username"));
+			assertEquals("60", PropUtil.getProperty("interval"));
 		} catch(Exception e) {
 			e.printStackTrace();
 			fail(e.getMessage());
@@ -25,8 +25,8 @@ public class PropUtilTest {
 	public void getPropertyWithDefault() {
 
 		try {
-			assertEquals("test", PropUtil.getProperty("cloudfiles.username", "zz"));
-			assertEquals("zz", PropUtil.getProperty("cloudfiles.nothere", "zz"));
+			assertEquals("60", PropUtil.getProperty("interval", "zz"));
+			assertEquals("zz", PropUtil.getProperty("blahblah", "zz"));
 		} catch(Exception e) {
 			e.printStackTrace();
 			fail(e.getMessage());
@@ -38,7 +38,7 @@ public class PropUtilTest {
 	public void getIntProperty() {
 
 		try {
-			assertEquals(30, PropUtil.getIntProperty("interval"));
+			assertEquals(60, PropUtil.getIntProperty("interval"));
 			assertEquals(-1, PropUtil.getIntProperty("blahblah"));
 		} catch(Exception e) {
 			e.printStackTrace();

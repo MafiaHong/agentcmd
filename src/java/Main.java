@@ -9,13 +9,13 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		logger.info("Started AgentCmd.");
+		logger.info("AgentCmd Started.");
 		PropertyConfigurator.configure("log4j.properties");
 
 		String tmpDir = System.getProperty("java.io.tmpdir");
 		int sleepSec=PropUtil.getIntProperty("interval", 120);
 		int sleepMilli=PropUtil.getIntProperty("interval", 120)*1000;
-		logger.info("Sleep interval: "+sleepSec+ " seconds.");
+		logger.info("Script check interval: "+sleepSec+ " seconds.");
 
 		try {
 			logger.info("Working Directory: " +new java.io.File( "." ).getCanonicalPath());
@@ -37,11 +37,12 @@ public class Main {
 					ByteArrayOutputStream os = new ByteArrayOutputStream();
 					CommandRunner cr = new CommandRunner(os);
 					cr.runCommand(new String[]{"cmd.exe", "/c", csId+".bat", csId}, new java.util.HashMap<String,String>(), tmpDir);
+					logger.info("Script run completed.");
 
-					logger.info("Archiving output.");
+					logger.info("Archiving script output.");
 					cmdSource.archiveOutput(csId, new String(os.toByteArray()));
 					cmdSource.deleteScript(csId);
-					logger.info("Finished running script.");
+					logger.info("Script deleted.");
 				}
 
 				Thread.sleep(sleepMilli);

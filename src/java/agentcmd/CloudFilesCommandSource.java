@@ -24,7 +24,7 @@ public class CloudFilesCommandSource implements ICommandSource {
 		this.container = PropUtil.getProperty("cloudfiles.container");
         client = new FilesClient(username, password);
 		if (!client.login()) {
-			logger.error("Failed to login to Cloud Files. Please specify the correct username and password in agentcmd.properties. Exiting.");
+			logger.error("Failed to login to Cloud Files. Please specify the correct username and password in agentcmd.properties.");
 			throw new Exception("Failed to login to Cloud Files.");
 		}
 	}
@@ -34,7 +34,7 @@ public class CloudFilesCommandSource implements ICommandSource {
 			byte[] bytes = client.getObject(container, scriptId);
 			return new String(bytes);
 		} catch (FilesNotFoundException fe) {
-			logger.info("No data found for server: " + scriptId);
+			logger.info("No script found.");
 			return null;
 		}
 	}
