@@ -43,7 +43,7 @@ public class XenStoreClient
 				throw new XenStoreClientException("Failed to run XenStoreClient command.", new String(os.toByteArray()));
 			}
 		} catch (Exception e) {
-				throw new XenStoreClientException("Failed to run XenStoreClient command: " + e.getMessage(), "");
+				throw new XenStoreClientException("Exception running XenStoreClient command: " + e.getMessage(), e);
 		}
 	}
 
