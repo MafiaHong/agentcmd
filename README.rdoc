@@ -7,15 +7,44 @@ Agent to run commands on Windows based Rackspace Cloud Servers
 AgentCmd is an application that allows you to execute scripts on a Windows
 Cloud Servers using a pluggable command source implementation.
 
-The application runs as a Windows Service.
-
-The application includes a pluggable ICommandSource interface which
-defines a way to obtain a script, execute it, and archive a log of
-the result. The cloud server ID is used as a key to obtain scripts and archive
-the results.
+The application runs as a Windows Service and includes a pluggable ICommandSource interface which defines a way to obtain a script, execute it, and archive a log of the result. The cloud server ID is used as a key to obtain scripts and archive the results.
 
 The default ICommandSource provider uses a Rackspace Cloud Files container to
 provide access to a scripts and archive the results.
+
+== Installation
+
+1) Download the 64bit Installer:
+
+ http://c2865862.cdn.cloudfiles.rackspacecloud.com/AgentCmd_windows_1_0_0.exe
+
+2) Run the installer on a Rackspace Windows Cloud Server.
+
+3) Customize the agentcmd.properties file. (default location is C:\Program Files\AgentCmd\agentcmd.properties. Example:
+
+	# Check for new scripts every 60 seconds by default
+	interval=60
+
+	# Cloud Files username and API key
+	cloudfiles.username=
+	cloudfiles.api_key=
+
+	# The Cloud Files container where scripts will be stored
+	# Scripts should be named after the ID of the cloud server
+	# Example: agentcmd/123456
+	cloudfiles.container=agentcmd
+
+4) Start the AgentCmd Windows Service.
+
+--
+
+At this point you can upload any .bat script into the Cloud Files account referenced in the agentcmd.properties file and it will be executed on the Windows Cloud Server. The script should be named by the ID of the cloud server. A log file containing stdout/stderr from the script execution will be uploaded to the same location as the script with a .out suffix. Scripts are removed from Cloud Files once executed.
+
+== Development Requirements
+
+ * Java 1.6+
+ * Ant 1.8+
+ * Install4j 4.x **in order to build executable installers only. Install4j is available at http://www.ej-technologies.com/products/install4j/overview.html.
 
 == Author
 
